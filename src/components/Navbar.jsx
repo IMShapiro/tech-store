@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../contexts/UserContext.jsx';
 
 const Navbar = () => {
+
+  const {isSignedIn} = useContext(UserContext);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -48,11 +53,15 @@ const Navbar = () => {
                 <i className="bi bi-cart"></i> Cart
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                <i className="bi bi-person"></i> Login
-              </Link>
-            </li>
+            {isSignedIn ? (
+                <i>Account</i>
+            ):(
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">
+                  <i className="bi bi-person"></i> Login
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
       </div>
