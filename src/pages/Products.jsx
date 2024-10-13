@@ -4,6 +4,7 @@ import useProducts from "../hooks/useProducts";
 import Searchbar from "../components/Searchbar";
 import ProductCard from "../components/ProductCard";
 import { useCart } from "../hooks/useCart";
+import "../assets/styles/Products.css";
 
 const Products = () => {
   const { 
