@@ -9,7 +9,7 @@ import {
   updateDoc,
   Timestamp } from "firebase/firestore";
 
-export async function createOrder(uid, name, email, number, address, items, cartTotal, paymentRef, qualifiedForSpecial) {
+export async function createOrder(uid, name, email, number, address, items, cartTotal, paymentRef) {
   try {
     const orderData = {
       uid,
@@ -20,7 +20,6 @@ export async function createOrder(uid, name, email, number, address, items, cart
       items,
       cartTotal,
       paymentRef,
-      qualifiedForSpecial,
       status: "pending",
       createdAt: new Date(),
     };

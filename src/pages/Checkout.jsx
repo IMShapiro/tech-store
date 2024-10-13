@@ -23,17 +23,8 @@ const Checkout = () => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalQuantity, setTotalQuantity] = useState(0);
     const [formsFilled, setFormsFilled] = useState(false);
-    const [specials, setSpecials] = useState([]);
-    const [qualifiesForSpecial, setQualifiesForSpecial] = useState(false);
     const [previousPrice, setPreviousPrice] = useState(null);
 
-    useEffect(() => {
-        const loadSpecials = async () => {
-            const specialsData = await fetchSpecials();
-            setSpecials(specialsData);
-        };
-        loadSpecials();
-    }, []);
 
     useEffect(() => {
         const cartData = getCart();
@@ -45,17 +36,7 @@ const Checkout = () => {
         setTotalPrice(initialTotalPrice);
         setTotalQuantity(getTotalQuantity(cartData));
         
-        if (specials.length > 0 && specials[0].minRequirements !== undefined) {
-            if (cartLength >= specials[0].minCartItems && initialTotalPrice >= specials[0].minRequirements) {
-                setPreviousPrice(initialTotalPrice);
-                const discount = ((specials[0].appliedDiscount / 100) * initialTotalPrice).toFixed(2);
-                setTotalPrice((initialTotalPrice - discount).toFixed(2));
-                setQualifiesForSpecial(true);
-            }
-        } else {
-            console.log("No special found.");
-        }
-    }, [specials]);
+    }, []);
 
     if (!user) {
         return <Login />;
@@ -97,7 +78,6 @@ const Checkout = () => {
                         cart,
                         totalPrice,
                         transaction.reference,
-                        qualifiesForSpecial,
                     );
 
                     emptyCart();
@@ -199,7 +179,6 @@ const Checkout = () => {
                         cartLength={cart.length}
                         totalQuantity={totalQuantity}
                         totalPrice={totalPrice}
-                        qualifiesForSpecial={qualifiesForSpecial}
                         previousPrice={previousPrice}
                     />
                     {!formsFilled && <button

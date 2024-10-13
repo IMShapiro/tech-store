@@ -52,9 +52,6 @@ export function addToCart(product) {
   export function getTotalQuantity(cart) {
     return cart.reduce((acc, product) => acc + product.quantity, 0);
   }
-  
-  const specialsRef = collection(db,"specials");
-  const specials = await getDocs(specialsRef);
 
   // Calculate the total price of items in the cart
   export function getTotalPrice(cart) {

@@ -1,8 +1,7 @@
-const CartSummary = ({ cartLength, totalQuantity, totalPrice, qualifiesForSpecial, previousPrice }) => {
+const CartSummary = ({ cartLength, totalQuantity, totalPrice, previousPrice }) => {
     return (
       <>
         <h3>Cart Summary</h3>
-        {qualifiesForSpecial && <p>You qualify for our special. Enjoy the discount.</p>}
         <p><b>{cartLength}</b> Products</p>
         <p><b>{totalQuantity}</b> Items</p>
         {previousPrice && <p><b>Previous Price:</b> {previousPrice}</p>}
