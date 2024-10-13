@@ -17,7 +17,7 @@ import {
  * @returns {Promise<void>}
  */
 
-export let authError = ''; 
+export let authError = '';
 
 export const createUserWithPassword = async (email, password) => {
     try {
@@ -59,7 +59,6 @@ export const signInUserWithPassword = async (email, password) => {
     try{
         await signInWithEmailAndPassword(auth, email, password);
         navigate("/")
-        
     } catch (error) {
         console.error("Error signing in user: ", error);
         authError = useAuthErrorHandler(error);

@@ -12,6 +12,9 @@ import Contact from "./pages/Contact.jsx"
 import UserContextProvider from './contexts/UserContext.jsx'
 import ProductDetails from './pages/ProductDetails.jsx'
 import Signup from './pages/Signup.jsx'
+import Account from './pages/Account.jsx'
+import Checkout from './pages/Checkout.jsx'
+import { CheckoutProvider } from './contexts/CheckoutContext.jsx'
 
 const router = createBrowserRouter([
   {
@@ -45,6 +48,14 @@ const router = createBrowserRouter([
         element: <Cart/>
       },
       {
+        path: "/checkout",
+        element: <Checkout/>
+      },
+      {
+        path: "/account",
+        element: <Account />
+      },
+      {
         path: "/contact",
         element: <Contact/>
       }
@@ -55,7 +66,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <UserContextProvider>
-      <RouterProvider router={router}/>
+      <CheckoutProvider>
+        <RouterProvider router={router}/>
+      </CheckoutProvider>
     </UserContextProvider>
   </StrictMode>,
 )

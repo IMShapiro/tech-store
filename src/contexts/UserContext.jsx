@@ -1,16 +1,24 @@
-import { createContext } from "react"
-import { useState } from "react"
+import { createContext, useState, useEffect } from "react"
+import { auth } from "../config/FirebaseConfig";
 
-export const UserContext =  createContext()
+export const UserContext = createContext();
 
-function UserContextProvider({children}){
+const UserContextProvider = ({ children }) => {
     const [isSignedIn, setIsSignedIn] = useState(false);
 
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            setIsSignedIn(!!user); // If user exists, set to true, otherwise false
+        });
+
+        return () => unsubscribe(); // Clean up the listener on unmount
+    }, []);
+
     return (
-        <UserContext.Provider value={{isSignedIn}}>
+        <UserContext.Provider value={{ isSignedIn }}>
             {children}
         </UserContext.Provider>
-    )
+    );
 }
 
 export default UserContextProvider;

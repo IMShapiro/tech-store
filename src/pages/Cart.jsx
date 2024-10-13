@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import CartSummary from "../components/CartSummary";
 import { useCart } from "../hooks/useCart";
@@ -18,7 +18,7 @@ const Cart = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);
 
-  const isSignedIn = UserContext.isSignedIn;
+  const {isSignedIn} = useContext(UserContext);
 
   // Initialize cart and totals on mount
   useEffect(() => {
